@@ -9,7 +9,16 @@
 $.Model.extend('Cookbook.Models.Recipe',
 /* @Static */
 {
-	/**
+	init: function() {
+    // validating stuff!
+    this.validate("name", function() {
+      if (this.name == '') {
+        return 'Name is required';
+      }
+    })
+  },
+
+  /**
  	 * Retrieves recipes data from your backend services.
  	 * @param {Object} params params that might refine your results.
  	 * @param {Function} success a callback function that returns wrapped recipe objects.

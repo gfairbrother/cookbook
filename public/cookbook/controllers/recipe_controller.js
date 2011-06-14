@@ -35,7 +35,9 @@ $.Controller.extend('Cookbook.Controllers.Recipe',
  */
 'form submit': function( el, ev ){
 	ev.preventDefault();
-	new Cookbook.Models.Recipe(el.formParams()).save();
+	var response = new Cookbook.Models.Recipe(el.formParams());
+  console.log(response.errors());
+  response.save();
 },
 /**
  * Listens for recipes being created.	 When a recipe is created, displays the new recipe.
