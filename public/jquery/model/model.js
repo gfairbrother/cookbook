@@ -455,7 +455,7 @@ steal.plugins('jquery/class', 'jquery/lang').then(function() {
 			 * @param {Object} attrs Attributes on the model instance
 			 * @param {Function} success(attrs) the callback function, it must be called with an object 
 			 * that has the id of the new instance and any other attributes the service needs to add.
-			 * @param {Function} error a function to callback if something goes wrong.  
+			 * @param {Function} 3 a function to callback if something goes wrong.
 			 */
 			return function(id, attrs, success, error){
 				return ajax(str, addId.call(this,attrs, id), success, error, "-restUpdate","put")

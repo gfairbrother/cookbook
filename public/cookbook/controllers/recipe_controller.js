@@ -35,10 +35,28 @@ $.Controller.extend('Cookbook.Controllers.Recipe',
  */
 'form submit': function( el, ev ){
 	ev.preventDefault();
-	var response = new Cookbook.Models.Recipe(el.formParams());
-  console.log(response.errors());
-  response.save();
+	var model = new Cookbook.Models.Recipe(el.formParams());
+
+    if (this.validate(model)) {
+        model.update(el.formParams());
+    }
+
 },
+
+validate: function(model) {
+  if (model.errors()) {
+      this.renderErrors( model.errors() );
+      return false;
+  }else{
+      return true;
+  }
+},
+
+renderErrors: function(errors){
+    console.log(errors)
+  $('#errors').html(this.view('errors', errors ))
+},
+
 /**
  * Listens for recipes being created.	 When a recipe is created, displays the new recipe.
  * @param {String} called The open ajax event that was called.
@@ -66,10 +84,79 @@ $.Controller.extend('Cookbook.Controllers.Recipe',
  /**
  * Updates the recipe from the edit values.
  */
+//'.update click': function( el ){
+//	var $recipe = el.closest('.recipe');
+//    var model = $recipe.model();
+//    model.attrs($recipe.formParams());
+
+//    var errors = model.errors();
+//
+//    if(!errors){
+//      model.update();
+//    }
+//},
+
 '.update click': function( el ){
-	var $recipe = el.closest('.recipe'); 
-	$recipe.model().update($recipe.formParams());
+	var $recipe = el.closest('.recipe');
+    var model = $recipe.model();
+
+    model.attrs($recipe.formParams());
+
+    var self = this;
+
+    if (this.validate(model)) {
+        model.update(
+            $recipe.formParams(),
+            function(){
+//                alert("success");
+            },
+            function(xhr, errorType) {
+                console.log(xhr.responseText)
+                self.renderErrors( $.parseJSON(xhr.responseText)) ;
+            }
+        )
+    }
+//    var model = $recipe.model();
+//    model.update($recipe.formParams());
+//
+//    var errors = model.errors();
+//    if (errors) {
+//        alert("");
+//    }
+    //$recipe.model().update($recipe.formParams(), function(){}, error);
 },
+
+
+//'.update click': function( el ){
+//	var $recipe = el.closest('.recipe');
+//    var model = $recipe.model();
+//    model.attrs($recipe.formParams());
+//    var errors = model.errors();
+//
+//    if(!errors){
+//      model.update();
+//    } else {
+//      this.renderErrors(errors)
+//    }
+//
+//    //$recipe.model().update($recipe.formParams(), function(){}, error);
+//},
+
+//'.update click': function( el ){
+//	var $recipe = el.closest('.recipe');
+//    var model = $recipe.model();
+//    //model.attrs($recipe.formParams(), function(){}, this.callback('renderErrors'));
+//    var error = this.callback("renderErrors");
+//    model.update($recipe.formParams(), function(){}, error);
+////    model.update();
+////    if (!model.update()) {
+////        this.renderErrors(model.errors());
+////    }
+////    var error = this.callback("renderErrors");
+////    $recipe.model().update($recipe.formParams(), function(){}, error);
+//},
+
+
  /**
  * Listens for updated recipes.	 When a recipe is updated, 
  * update's its display.

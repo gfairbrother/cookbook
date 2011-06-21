@@ -29,7 +29,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       respond_with @recipe
     else
-      render :json => @recipe.errors, :status => :bad_request
+      render :json => @recipe.errors.to_json, :status => :bad_request
     end
   end
 
@@ -39,7 +39,7 @@ class RecipesController < ApplicationController
     if @recipe.update_attributes(params)
       respond_with @recipe
     else
-      render :json => @recipe.errors, :status => :bad_request
+      render :text => @recipe.errors, :status => :bad_request
     end
   end
 

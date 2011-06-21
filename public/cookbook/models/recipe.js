@@ -9,13 +9,19 @@
 $.Model.extend('Cookbook.Models.Recipe',
 /* @Static */
 {
-	init: function() {
+  init: function() {
     // validating stuff!
     this.validate("name", function() {
       if (this.name == '') {
         return 'Name is required';
       }
-    })
+    });
+
+    this.validate("description", function() {
+      if (this.description == '') {
+        return 'Description is required';
+      }
+    });
   },
 
   /**
