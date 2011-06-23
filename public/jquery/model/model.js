@@ -1535,8 +1535,8 @@ steal.plugins('jquery/class', 'jquery/lang').then(function() {
 		this.each(function() {
 			each($.data(this, "models") || {}, function( name, instance ) {
 				//either null or the list type shared by all classes
-				kind = kind === undefined ? 
-					instance.Class.List || null : 
+				kind = kind === undefined ?
+					instance.Class.List || null :
 					(instance.Class.List === kind ? kind : null);
 				collection.push(instance);
 			});

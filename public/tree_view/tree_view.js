@@ -11,6 +11,7 @@ steal.plugins(
 
     .then(function(){           //called when all prior files have completed
 
+
     $.Controller.extend('TreeView',
     /* @Static */
     {
@@ -21,48 +22,60 @@ steal.plugins(
         init: function() {
             if (this.options.data) {
                 this.draw(this.options.data);
+            }else if (this.options.model){
+                this.options.model.findAll({}, this.callback('list'))
             }
         },
-        draw: function(data) {
+        list: function(data) {
+//            console.log(data);
             this.element.html(this.view('init', data ));
         }
 
     })
 
-//    console.log($('').controllers());
 
-    $('#tree_view').tree_view(
-    {
-            data: [
-                {
-                    text:'Spelling',
-                    hasChildren: true,
-                    children: [
-                                {
-                                    text:'Level 1',
-                                    hasChildren: true,
-                                    children: [
-                                                {
-                                                    text:'Unit 1',
-                                                    hasChildren: false
-                                                }
-                                    ]
-                                },
-                                {
-                                    text:'Level 2',
-                                    hasChildren: false,
-                                    children: [
-
-                                    ]
-                                }
-                    ]
-                },
-                { text:'Phonics', hasChildren:false }
-            ]
-
-    }
-    );
+    $.Model.extend("Subjects",{
+        findAll: "/subjects"
+    },{});
 
 
+    $('#tree_view').tree_view({model: Subjects});
+
+
+
+
+//[
+//    text:'Spelling',
+//    hasChildren: true,
+//    children: [
+//                {
+//                    text:'Level 1',
+//                    hasChildren: true,
+//                    children: [
+//                                {
+//                                    text:'Unit 1',
+//                                    hasChildren: false
+//                                }
+//                    ]
+//                },
+//                {
+//                    text:'Level 2',
+//                    hasChildren: false,
+//                    children: [
+//
+//                    ]
+//                }
+//    ]
+//},
+//{ text:'Phonics', hasChildren:false }
+// ]
+
+//s = Subjects.models({
+//name: 'tim',
+//data: [{id:1, name:"tim"}]
+//}
+//)
+//s.name
+//s[0]
 
 })

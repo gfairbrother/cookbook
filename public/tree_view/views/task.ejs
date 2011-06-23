@@ -1,0 +1,6 @@
+<% for(var i =0; i < tasks.length; i++){ %>
+<div <%= tasks[i] %>>
+   <label><%= tasks[i].name %></label>
+   <%= tasks[i].timeRemaining() %>
+</div>
+<% } %>
