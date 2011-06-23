@@ -1,6 +1,6 @@
 <ul>
 <% $.each(this, function(i, data) { %>
-    <li><%= data.text%>
+    <li <%= this%>><%= data.text%>
         <% if (data.hasChildren) {%>
           <%= $.View('//tree_view/views/init',data.children)%>
         <%}%>

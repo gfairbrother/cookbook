@@ -29,8 +29,10 @@ steal.plugins(
         list: function(data) {
 //            console.log(data);
             this.element.html(this.view('init', data ));
+        },
+        'li click': function(el) {
+            console.log(el.model())
         }
-
     })
 
 
