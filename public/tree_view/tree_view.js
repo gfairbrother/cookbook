@@ -14,29 +14,54 @@ steal.plugins(
     $.Controller.extend('TreeView',
     /* @Static */
     {
-        onDocument: true,
-        defaults: {
-            data: [
-                { text:'Spelling', hasChildren:false },
-                { text:'Phonics', hasChildren:false }
-            ]
-        }
+        defaults: {}
     },
     /* @Prototype */
     {
         init: function() {
-            if(!$("#tree").length){
-             $(document.body).append($('<div/>').attr('id','tree'));
-                 //Cookbook.Models.Recipe.findAll({}, this.callback('list'));
-                console.log(this)
-                $('#tree').html(this.view('init', {data:this.options.data} ));
+            if (this.options.data) {
+                this.draw(this.options.data);
             }
+        },
+        draw: function(data) {
+            this.element.html(this.view('init', data ));
         }
 
     })
 
+//    console.log($('').controllers());
 
-//    $(document).controllers();
+    $('#tree_view').tree_view(
+    {
+            data: [
+                {
+                    text:'Spelling',
+                    hasChildren: true,
+                    children: [
+                                {
+                                    text:'Level 1',
+                                    hasChildren: true,
+                                    children: [
+                                                {
+                                                    text:'Unit 1',
+                                                    hasChildren: false
+                                                }
+                                    ]
+                                },
+                                {
+                                    text:'Level 2',
+                                    hasChildren: false,
+                                    children: [
+
+                                    ]
+                                }
+                    ]
+                },
+                { text:'Phonics', hasChildren:false }
+            ]
+
+    }
+    );
 
 
 
