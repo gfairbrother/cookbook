@@ -27,7 +27,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(params)
 
     if @recipe.save
-      respond_with @recipe
+      render :json => @recipe.to_json(:only => [:created_at, :updated_at])
     else
       render :json => @recipe.errors.to_json, :status => :bad_request
     end
@@ -37,7 +37,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
 
     if @recipe.update_attributes(params)
-      respond_with @recipe
+      render :json => @recipe.to_json(:only => [:created_at, :updated_at])
     else
       render :text => @recipe.errors, :status => :bad_request
     end

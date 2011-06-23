@@ -1,9 +1,15 @@
 <%for(var attribute in this.Class.attributes){%>
-	<%if(attribute == 'id') continue;%>
+	<%if(attribute == 'id' || attribute == 'created_at' || attribute == 'updated_at') continue;%>
 	<td class='<%= attribute%>'>
 		<%=this[attribute]%>
 	</td>
 <%}%>
+<td class='created_at'>
+    <%= this.attr('created_at') %>
+</td>
+<td class='updated_at'>
+    <%= this.attr('updated_at') %>
+</td>
 <td>
 	<a href='javascript://' class='edit'>edit</a>
 	<a href='javascript://' class='destroy'>destroy</a>

@@ -9,6 +9,18 @@
 $.Model.extend('Cookbook.Models.Recipe',
 /* @Static */
 {
+    attributes : {
+        created_at : 'date',
+        updated_at : 'date'
+    },
+
+    convert : {
+        // a date converter helper
+        date : function(raw){
+          return new Date(raw)
+        }
+    },
+
   init: function() {
     // validating stuff!
     this.validate("name", function() {
@@ -94,4 +106,12 @@ $.Model.extend('Cookbook.Models.Recipe',
 	}
 },
 /* @Prototype */
-{});
+{
+  // helper functions
+//  getCreatedAt: function(){
+//    return this.created_at.toDateString()
+//  },
+//  getUpdatedAt: function(){
+//    return this.updated_at.toDateString()
+//  }
+});

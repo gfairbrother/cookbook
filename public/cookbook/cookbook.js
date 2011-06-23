@@ -1,4 +1,4 @@
-steal.plugins(	
+steal.plugins(
 	'jquery/controller',			// a widget factory
 	'jquery/controller/subscribe',	// subscribe to OpenAjax.hub
 	'jquery/view/ejs',				// client side templates
@@ -7,7 +7,7 @@ steal.plugins(
   'jquery/model/validations',					// validations
 	//'jquery/dom/fixture',			// simulated Ajax requests
 	'jquery/dom/form_params')		// form data helper
-	
+
 	.css('cookbook')	// loads styles
 
 	.resources()					// 3rd party script's (like jQueryUI), in resources folder

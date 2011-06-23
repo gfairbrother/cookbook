@@ -5,9 +5,11 @@
 	<thead>
 	<tr>
 		<% for(var attr in Cookbook.Models.Recipe.attributes){%>
-			<% if(attr == 'id') continue;%>
+			<%if(attr == 'id' || attr == 'created_at' || attr == 'updated_at') continue;%>
 			<th><%= attr%> </th>	 
 		<%}%>
+        <th>Created At</th>
+        <th>Updated At</th>
 		<th>Options</th>
 	</tr>
 	</thead>
@@ -18,7 +20,7 @@
 <h2>New recipe</h2>
 <form>
 	<% for(var attr in Cookbook.Models.Recipe.attributes){ %>
-		<% if(attr == 'id') continue;%>
+		<%if(attr == 'id' || attr == 'created_at' || attr == 'updated_at') continue;%>
 		<div>
 			<label><%= attr %> </label><br />
 			<input type="text" value="" name="<%= attr %>"/>
