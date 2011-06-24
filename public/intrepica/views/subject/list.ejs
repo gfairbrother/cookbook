@@ -1,0 +1,5 @@
+<%for(var i = 0; i < subjects.length ; i++){%>
+	<tr <%= subjects[i]%>>
+		<%= $.View('//intrepica/views/subject/show',subjects[i])%>
+	</tr>
+<%}%>
