@@ -1,9 +1,0 @@
-<ul>
-<% $.each(this, function(i, data) { %>
-    <li <%= this%>><%= data.text%>
-        <% if (data.hasChildren) {%>
-          <%= $.View('//tree_view/views/init',data.children)%>
-        <%}%>
-    </li>
-<%})%>
-</ul>
