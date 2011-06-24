@@ -7,6 +7,7 @@ steal.plugins(
   'jquery/model/validations',					// validations
 	//'jquery/dom/fixture',			// simulated Ajax requests
     'inui/tree_view',
+    'ss/router/controller',         //http://secondstory.github.com/secondstoryjs-router/
 	'jquery/dom/form_params')		// form data helper
 
 	.css('cookbook')	// loads styles
@@ -15,6 +16,26 @@ steal.plugins(
 
 	.models('recipe')						// loads files in models folder
 
-	.controllers('recipe')					// loads files in controllers folder
+	.controllers('recipe')	// loads files in controllers folder
 
-	.views();						// adds views to be added to build
+	.views()						// adds views to be added to build
+
+    .then(function($){
+
+    Router.add("/cookbook/recipes").to("cookbook_recipes");
+    Router.add("/cookbook/recipes/:id").to("show_cookbook_recipes");
+//    console.log(Router.recognize('/cookbook/recipes/1/edit'))
+
+//    var key = window.location.pathname,
+//            foundRoute = Router.recognize(key);
+//
+//    if (foundRoute && $(document)[foundRoute.destination]) {
+//        $(document)[foundRoute.destination](foundRoute.params);
+//    }
+
+//    Router.add("/about").to("my");
+//    console.log(Router.recognize('/about'))
+
+
+
+    })

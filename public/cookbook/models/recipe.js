@@ -53,6 +53,30 @@ $.Model.extend('Cookbook.Models.Recipe',
 			fixture: "//cookbook/fixtures/recipes.json.get" //calculates the fixture path from the url and type.
 		});
 	},
+
+
+//  findOne : function(params, success, error){
+//    var self = this,
+//    id = params.id;
+//    delete params.id;
+//    return $.get("/recipes/"+id,
+//                  params,
+//                  success,
+//                  "json thing.model")
+//  },
+
+	findOne: "/recipes/{id}",
+//        console.log(params)
+//		$.ajax({
+//			url: '/recipes',
+//			type: 'get',
+//			dataType: 'json',
+//			data: params,
+//			success: this.callback(['wrapMany',success]),
+//			error: error,
+//			fixture: "//cookbook/fixtures/recipes.json.get" //calculates the fixture path from the url and type.
+//		});
+
 	/**
 	 * Updates a recipe's data.
 	 * @param {String} id A unique id representing your recipe.

@@ -5,6 +5,8 @@
  * ["Cookbook.Controllers.Recipe.prototype.&#46;edit click" edit],
  * or ["Cookbook.Controllers.Recipe.prototype.&#46;destroy click" destroy] recipes.
  */
+steal.plugins("jquery/controller", "ss/router/subscribe").then(function($) {
+
 $.Controller.extend('Cookbook.Controllers.Recipe',
 /* @Static */
 {
@@ -15,12 +17,14 @@ $.Controller.extend('Cookbook.Controllers.Recipe',
  /**
  * When the page loads, gets all recipes to be displayed.
  */
- "{window} load": function(){
-	if(!$("#recipe").length){
-	 $(document.body).append($('<div/>').attr('id','recipe'));
-		 Cookbook.Models.Recipe.findAll({}, this.callback('list'));
- 	}
+// "{window} load": function(){
+ "/cookbook/recipes route": function(){
+    if(!$("#recipe").length){
+        $(document.body).append($('<div/>').attr('id','recipe'));
+        Cookbook.Models.Recipe.findAll({}, this.callback('list'));
+    }
  },
+
  /**
  * Displays a list of recipes and the submit form.
  * @param {Array} recipes An array of Cookbook.Models.Recipe objects.
@@ -74,6 +78,18 @@ renderErrors: function(errors){
 	var recipe = el.closest('.recipe').model();
 	recipe.elements().html(this.view('edit', recipe));
 },
+
+
+'/cookbook/recipes/:id route': function(path, params) {
+    Cookbook.Models.Recipe.findOne({id:params.id}, this.callback('show_one'));
+},
+
+
+show_one: function( recipe ){
+    $(document.body).append($('<div/>'))
+                    .html(this.view('show', recipe));
+},
+
  /**
  * Removes the edit interface.
  * @param {jQuery} el The recipe's cancel link element.
@@ -184,4 +200,8 @@ show: function( recipe ){
 "recipe.destroyed subscribe": function(called, recipe){
 	recipe.elements().remove();	 //removes ALL elements
  }
+});
+
+
+
 });

@@ -1,3 +1,5 @@
+<% console.log(this) %>
+
 <%for(var attribute in this.Class.attributes){%>
 	<%if(attribute == 'id' || attribute == 'created_at' || attribute == 'updated_at') continue;%>
 	<td class='<%= attribute%>'>
