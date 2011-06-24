@@ -1,0 +1,9 @@
+<ul>
+<% $.each(this, function(i, data) { %>
+    <li <%= this%>><%= data.text%>
+        <% if (data.hasChildren) {%>
+          <%= $.View('//inui/tree_view/views/tree',data.children)%>
+        <%}%>
+    </li>
+<%})%>
+</ul>

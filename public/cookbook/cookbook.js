@@ -6,6 +6,7 @@ steal.plugins(
 	'jquery/model',					// Ajax wrappers
   'jquery/model/validations',					// validations
 	//'jquery/dom/fixture',			// simulated Ajax requests
+    'inui/tree_view',
 	'jquery/dom/form_params')		// form data helper
 
 	.css('cookbook')	// loads styles

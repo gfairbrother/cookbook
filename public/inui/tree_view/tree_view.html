@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<title>Treeview</title>
+	</head>
+	<body>
+	  <h1>Treeview JSON</h1>
+      <div id='tree_view_json'></div>
+      <h1>Treeview Model</h1>
+      <div id='tree_view_model'></div>
+		<script type='text/javascript'
+                src='../../steal/steal.js?inui/tree_view,development'>
+        </script>
+        <script type='text/javascript'>
+		steal.plugins('jquery/dom/fixture').then(function(){
+            $.Model.extend("Subject",{
+                findAll: "/subjects"
+            },{});
+
+			$('#tree_view_model').inui_tree_view({model: Subject});
+
+
+            var data = [
+                    {
+                        text:'Spelling',
+                        hasChildren: true,
+                        children: [
+                                    {
+                                        text:'Level 1',
+                                        hasChildren: true,
+                                        children: [
+                                                    {
+                                                        text:'Unit 1',
+                                                        hasChildren: false
+                                                    }
+                                        ]
+                                    },
+                                    {
+                                        text:'Level 2',
+                                        hasChildren: false,
+                                        children: [
+
+                                        ]
+                                    }
+                        ]
+                    },
+                    { text:'Phonics', hasChildren:false }
+                ]
+
+
+            $('#tree_view_json').inui_tree_view({data: data});
+
+
+		}).start();
+
+
+
+
+        </script>
+	</body>
+</html>
