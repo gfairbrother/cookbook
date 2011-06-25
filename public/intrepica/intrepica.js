@@ -14,15 +14,15 @@ steal.plugins(
 
 	.resources()					// 3rd party script's (like jQueryUI), in resources folder
 
-	.models()						// loads files in models folder
+	.models('subject')						// loads files in models folder
 
-	.controllers('application')	    			// loads files in controllers folder
+	.controllers('application', 'subject')	    			// loads files in controllers folder
 
 	.views()						// adds views to be added to build
 
     .then(function($){
 
-    Router.add("/tasks").to("tasks");
+        Router.add("/subjects").to("subjects");
 
 //    Router.add("/intrepica/recipes/:id").to("show_cookbook_recipes");
 

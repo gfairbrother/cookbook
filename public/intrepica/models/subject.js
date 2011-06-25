@@ -17,7 +17,7 @@ $.Model.extend('Intrepica.Models.Subject',
  	 */
 	findAll: function( params, success, error ){
 		$.ajax({
-			url: '/subject',
+			url: '/subjects',
 			type: 'get',
 			dataType: 'json',
 			data: params,

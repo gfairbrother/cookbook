@@ -15,15 +15,24 @@ $.Controller.extend('Intrepica.Controllers.Subject',
 },
 /* @Prototype */
 {
- /**
- * When the page loads, gets all subjects to be displayed.
- */
- "{window} load": function(){
+
+ "/subjects route": function(){
 	if(!$("#subject").length){
 	 $(document.body).append($('<div/>').attr('id','subject'));
 		 Intrepica.Models.Subject.findAll({}, this.callback('list'));
  	}
  },
+
+
+ /**
+ * When the page loads, gets all subjects to be displayed.
+ */
+// "{window} load": function(){
+//	if(!$("#subject").length){
+//	 $(document.body).append($('<div/>').attr('id','subject'));
+//		 Intrepica.Models.Subject.findAll({}, this.callback('list'));
+// 	}
+// },
  /**
  * Displays a list of subjects and the submit form.
  * @param {Array} subjects An array of Intrepica.Models.Subject objects.
