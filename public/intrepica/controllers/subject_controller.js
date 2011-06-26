@@ -18,8 +18,10 @@ $.Controller.extend('Intrepica.Controllers.Subject',
 
  "/subjects route": function(){
 	if(!$("#subject").length){
-	 $(document.body).append($('<div/>').attr('id','subject'));
-		 Intrepica.Models.Subject.findAll({}, this.callback('list'));
+	 $('#content').append($('<div/>').attr('id','subject'));
+        $('#subject').inui_nested_set({
+            model: Intrepica.Models.Subject
+        });
  	}
  },
 

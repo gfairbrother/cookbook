@@ -6,7 +6,7 @@ steal.plugins(
 	'jquery/model',					// Ajax wrappers
 //  'jquery/model/validations',					// validations
 	//'jquery/dom/fixture',			// simulated Ajax requests
-//    'inui/tree_view',
+    'inui/nested_set',
     'ss/router/controller',         //http://secondstory.github.com/secondstoryjs-router/
 	'jquery/dom/form_params')		// form data helper
 	
