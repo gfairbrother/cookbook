@@ -20,10 +20,11 @@ ActiveRecord::Schema.define(:version => 20110623065230) do
   end
 
   create_table "subjects", :force => true do |t|
-    t.string   "text"
-    t.boolean  "hasChildren", :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name"
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "level"
   end
 
 end

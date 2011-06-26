@@ -12,12 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :text %><br />
-    <%= f.text_field :text %>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :hasChildren %><br />
-    <%= f.check_box :hasChildren %>
+    <%= f.select :parent_id, nested_set_options(Subject, @subject) {|i| "#{'-' * i.level} #{i.name}" } %>
   </div>
   <div class="actions">
     <%= f.submit %>

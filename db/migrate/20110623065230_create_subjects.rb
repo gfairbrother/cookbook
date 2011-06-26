@@ -1,11 +1,14 @@
 class CreateSubjects < ActiveRecord::Migration
   def self.up
     create_table :subjects do |t|
-      t.string :text
-      t.boolean :hasChildren, :default => true
-
-      t.timestamps
+      t.string :name
+      t.integer :parent_id
+      t.integer :lft
+      t.integer :rgt
+      t.integer :level
     end
+
+    add_index :subjects, :parent_id
   end
 
   def self.down
