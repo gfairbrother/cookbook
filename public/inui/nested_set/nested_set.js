@@ -9,21 +9,23 @@ steal.plugins(
         $.Controller.extend('Inui.NestedSet',
         /* @Static */
         {
-            defaults: {tmpl:'nested_set', id:''}
+            defaults: {
+                tmpl:'nested_set',
+                effect: 'slideDown',
+                id:''
+            }
         },
         /* @Prototype */
         {
             init: function() {
                 this.element.mxui_layout_tree();
-                this.options.model.findAll({id:this.options.id}, this.callback('draw', this.element))
                 this.tree = this.element.controller(Mxui.Layout.Tree)
+                this.options.model.findAll({id:this.options.id}, this.callback('draw', this.element))
             },
 
             draw: function(el, data) {
-                var view = this.view(this.options.tmpl, data );
-                this.tree.styleUL(
-						$(view)
-		        ).appendTo(el);
+                var $view = $(this.view(this.options.tmpl, data )).hide();
+                this.tree.styleUL($view).appendTo(el)[this.options.effect]();
             },
 
             'li click': function(li, ev) {

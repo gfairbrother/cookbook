@@ -22,11 +22,6 @@ steal.plugins(
 
     .then(function($){
 
-        Router.add("/subjects(/:id)").to("subjects");
-
-
-//    Router.add("/intrepica/recipes/:id").to("show_cookbook_recipes");
-
-
+        Router.add("/subjects(/:id)").to("subjects").name('subjects');
 
 })
