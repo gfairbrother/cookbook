@@ -16,13 +16,14 @@ $.Controller.extend('Intrepica.Controllers.Subject',
 /* @Prototype */
 {
 
- "/subjects route": function(){
-	if(!$("#subject").length){
-	 $('#content').append($('<div/>').attr('id','subject'));
-        $('#subject').inui_nested_set({
-            model: Intrepica.Models.Subject
-        });
- 	}
+ "/subjects(/:id) route": function(path, params){
+
+    $('#content').html(this.view('tree'));
+    $('#subjects').inui_nested_set({
+        model: Intrepica.Models.Subject,
+        id: params.id
+    });
+
  },
 
 

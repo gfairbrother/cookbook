@@ -12,7 +12,7 @@ class SubjectsController < ApplicationController
 
   def index
 
-    if params[:id]
+    if params[:id] and !params[:id].empty?
       @subjects = Subject.find(params[:id]).children
     else
       @subjects = Subject.where(:parent_id => nil).first.children

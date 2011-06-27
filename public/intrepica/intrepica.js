@@ -10,7 +10,7 @@ steal.plugins(
     'ss/router/controller',         //http://secondstory.github.com/secondstoryjs-router/
 	'jquery/dom/form_params')		// form data helper
 	
-	.css('intrepica')	// loads styles
+	.css('intrepica', '/mxui/layout/tree/tree')	// loads styles
 
 	.resources()					// 3rd party script's (like jQueryUI), in resources folder
 
@@ -22,7 +22,8 @@ steal.plugins(
 
     .then(function($){
 
-        Router.add("/subjects").to("subjects");
+        Router.add("/subjects(/:id)").to("subjects");
+
 
 //    Router.add("/intrepica/recipes/:id").to("show_cookbook_recipes");
 

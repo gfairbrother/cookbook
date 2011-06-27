@@ -27,4 +27,6 @@ ActiveRecord::Schema.define(:version => 20110623065230) do
     t.integer "level"
   end
 
+  add_index "subjects", ["parent_id"], :name => "index_subjects_on_parent_id"
+
 end
