@@ -1,0 +1,209 @@
+= Sherpa
+
+Simple HTTP routing in Javascript.
+
+== Example
+
+=== Recognition
+
+Here is an example of simple recognition run from Node.js.
+
+  var Sherpa = require('./lib/sherpa')
+  var sherpa = new Sherpa.Router();
+  sherpa.add('/test').to('testRoute')
+  sherpa.recognize('/test')
+
+Would return:
+
+  {
+    "destination": "testing",
+    "params": {},
+  }
+
+You can have a path with a variable in it by prepending a <tt>:</tt> to it. For example:
+
+  sherpa.add('/test/:variable').to('testing')
+  sherpa.recognize('/test/iloveyou')
+
+Would return
+
+  {
+    "destination": "testing",
+    "params": {
+      "variable": "iloveyou"
+    }
+  }
+
+Variables by default will not match beyond a slash (<tt>/</tt>) or a period (<tt>.</tt>).
+
+  sherpa.recognize('/test/iloveyou.html')
+
+Would return
+
+  undefined
+
+You can get around this by adding a <tt>matchesWith</tt> regex
+
+  sherpa.add('/test/:variable', {matchesWith: {variable: /.*/}}).to('testing')
+  sherpa.recognize('/test/iloveyou.html')
+
+Would return
+
+  {
+    "destination": "testing",
+    "params": {
+      "test2": "testing.help"
+    }
+  }
+
+And...
+
+  sherpa.add('/test2/:test2.:format', {matchesWith: {format: /html|text/}}).to('testing')
+  sherpa.recognize('/test2/testing.json')
+
+Would return
+
+  undefined
+
+But if you change the extension to one supported by the <tt>matchesWith</tt> specified,
+
+  sherpa.recognize('/test2/testing.html')
+
+Would return
+
+  {
+   "destination": "testing",
+   "params": {
+    "test2": "testing",
+    "format": "html"
+   }
+  }
+
+Optional parts of the path are marked with <tt>(</tt> and <tt>)</tt>. For example:
+
+  sherpa.add('/test(/:variable)').to('testing')
+  sherpa.recognize('/test/world')
+
+Would return
+
+  {
+   "destination": "testing",
+   "params": {
+    "variable": "world"
+   }
+  }
+
+And
+  sherpa.add('/test(/:variable)').to('testing')
+  sherpa.recognize('/test')
+
+Would return only
+  {
+   "destination": "testing",
+   "params": { }
+  }
+
+You can also specify other parts of the request to match on using <tt>conditions</tt>.
+
+  sherpa.add('/test', {conditions: {method: 'GET'}}).to('testing')
+  sherpa.recognize('/test', {method: 'GET'})
+
+  {
+    "destination": "testing",
+    "params": {}
+  }
+
+But
+
+  sherpa.recognize('/test', {method: 'POST'})
+
+Will just return
+
+  undefined
+
+You can also use regex here, such as:
+
+  sherpa.add('/test', {conditions: {method: /GET|POST/}}).to('testing')
+
+=== Generation
+
+Generating is easy too.
+
+  sherpa.add('/test2/:test2.:format').name('test')
+  sherpa.generate('test', {test2: 'variable', format: 'html'})
+
+Would return
+
+  "/test2/variable.html"
+
+Any extra variables used as params would be appended as part of the query string.
+
+  sherpa.generate('test', {test2: 'variable', format: 'html', page: '1'})
+
+Would return
+
+  "/test2/variable.html?page=1"
+
+== Connect
+
+Sherpa has an interface to allow it to work with the Connect framework.
+
+  var Sherpa = require('sherpa/connect'),
+      router = new Sherpa.Connect();
+
+In addition to the normal methods avaliable with the router, there are also a number of helpers defined.
+
+  GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY
+
+  router.GET(     "/some url", function(req,resp,next){ doSomething(); });
+  router.POST(    "/some url", function(req,resp,next){ doSomething(); });
+  router.GET(     "/some url", function(req,resp,next){ doSomething(); });
+  router.DELETE(  "/some url", function(req,resp,next){ doSomething(); });
+  router.HEAD(    "/some url", function(req,resp,next){ doSomething(); });
+  router.ANY(     "/", function(req, resp, next){ pressTheAnyKey();    });
+
+To connect the router into the Connect middleware system:
+
+  var server = Connect.createServer();
+  server.use("/mount_point", router.connect())
+
+== Node.js
+
+To use this within Node.js, simply use the Node.js interface. Here is a simple example:
+
+  require('../lib/sherpa')
+
+  var sys = require("sys"), http = require("http");
+
+  http.createServer(new Sherpa.interfaces.NodeJs([
+    ['/hello', function (request, response) {
+      response.sendHeader(200, {"Content-Type": "text/plain"});
+      response.sendBody("Hello World\n");
+      response.finish();
+    }],
+    ['/hello/:name', {matchesWith: {name: /^\d+$/}}, function (request, response) {
+      response.sendHeader(200, {"Content-Type": "text/plain"});
+      response.sendBody("Hello Number "+request.sherpaResponse.params['name']+"\n");
+      response.finish();
+    }],
+    ['/hello/:name', function (request, response) {
+      response.sendHeader(200, {"Content-Type": "text/plain"});
+      response.sendBody("Hello "+request.sherpaResponse.params['name']+"\n");
+      response.finish();
+    }],
+    ['/hello/:name', {conditions:{method: 'POST'}}, function (request, response) {
+      response.sendHeader(200, {"Content-Type": "text/plain"});
+      response.sendBody("Hello POSTY "+request.sherpaResponse.params['name']+"\n");
+      response.finish();
+    }],
+    ['not found', function (request, response) {
+      response.sendHeader(404, {"Content-Type": "text/plain"});
+      response.sendBody("I can't find what you're looking for..");
+      response.finish();
+    }]
+
+  ]).listener()).listen(8000);
+  sys.puts("Server running at http://127.0.0.1:8000/");
+
+Then calling to <tt>/hello</tt> would produce <tt>Hello World</tt>, <tt>/hello/daniel</tt> would produce <tt>Hello daniel</tt> and any other request would respond with a 404 and <tt>I can't find what you're looking for..</tt>.
+
