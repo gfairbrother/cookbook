@@ -4,7 +4,7 @@ steal.plugins(
 	'jquery/view/ejs',				// client side templates
 	'jquery/controller/view',        // lookup views with the controller's name
     'jquery/model',
-    'mxui/layout/tree').then(function(){           //called when all prior files have completed
+    'inui/tree').then(function(){           //called when all prior files have completed
 
         $.Controller.extend('Inui.NestedSet',
         /* @Static */
@@ -18,8 +18,8 @@ steal.plugins(
         /* @Prototype */
         {
             init: function() {
-                this.element.mxui_layout_tree();
-                this.tree = this.element.controller(Mxui.Layout.Tree)
+                this.element.inui_tree();
+                this.tree = this.element.controller(Inui.Tree)
                 this.options.model.findAll({id:this.options.id}, this.callback('draw', this.element))
             },
 

@@ -1,0 +1,33 @@
+.inui_tree ul, .inui_tree{
+	list-style: none;
+}
+.inui_tree li {
+	margin:0px;
+	pading: 0px;
+}
+.inui_tree li a {
+	background: url(t.png) no-repeat;
+	padding-left: 20px;
+	height: 18px;
+	font-size: 12px;
+	display: block;
+
+}
+
+.inui_tree ul {
+	background: url(v.png) repeat-y;
+	
+	padding-left: 20px;
+}
+.inui_tree .has-children>a:hover {
+	text-decoration: underline;
+}
+.inui_tree .has-children>a{
+	cursor: pointer;
+}
+.inui_tree .last-child>a{
+	background: url(e.png) no-repeat;
+}
+.inui_tree .last-child>ul, .inui_tree .root-node{
+	background: none;
+}

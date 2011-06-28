@@ -1,0 +1,24 @@
+.tabarea {
+border: solid 1px;
+}
+.tabarea li{
+float: left;
+padding: 10px;
+list-style: none;
+border: solid 1px green;
+background-color: black;
+color: white;
+}
+.tabarea ul {
+height: 40px;
+border-bottom: solid 1px gray;
+padding: 0px;
+margin: 0px;
+}
+.tabarea .active {
+background-color: white;
+color: black;
+}
+.tabarea li.selected {
+color: red;
+}
