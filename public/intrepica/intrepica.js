@@ -22,9 +22,11 @@ steal.plugins(
 	//'jquery/dom/fixture',			// simulated Ajax requests
     'inui/nested_set', 'inui/column_navigation',
     'ss/router/controller',         //http://secondstory.github.com/secondstoryjs-router/
-	'jquery/dom/form_params')		// form data helper
-	
-	.css('intrepica', '/inui/tree/tree', '/inui/column_navigation/column_navigation')	// loads styles
+	'jquery/dom/form_params',       // form data helper
+    '/mxui/layout/split'
+        )
+
+	.css('intrepica')	// loads styles
 
 	.resources()					// 3rd party script's (like jQueryUI), in resources folder
 

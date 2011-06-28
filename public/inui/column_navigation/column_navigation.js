@@ -3,7 +3,9 @@ steal.plugins(
 	'jquery/controller/subscribe',	// subscribe to OpenAjax.hub
 	'jquery/view/ejs',				// client side templates
 	'jquery/controller/view',        // lookup views with the controller's name
-    'jquery/model').then(function(){           //called when all prior files have completed
+    'jquery/model')
+      .css('column_navigation')
+        .then(function(){           //called when all prior files have completed
 
         $.Controller.extend('Inui.ColumnNavigation',
         /* @Static */

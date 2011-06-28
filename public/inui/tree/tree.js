@@ -1,4 +1,8 @@
-steal.plugins('jquery/controller', 'jquery/event/default').then(function($){
+
+
+steal.plugins('jquery/controller', 'jquery/event/default')
+        .css('tree')
+        .then(function($){
 	$.Controller.extend("Inui.Tree",
 	{
 		defaults : {
