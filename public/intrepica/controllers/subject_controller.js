@@ -10,29 +10,33 @@ steal.plugins("jquery/controller", "ss/router/subscribe").then(function($) {
     $.Controller.extend('Intrepica.Controllers.Subject',
     /* @Static */
     {
-        onDocument: true,
-        menuStyle:'inui_nested_set'
+        onDocument: true
     },
     /* @Prototype */
     {
-     "/subjects(/:id) route": function(path, params){
+     "/subjects(/:type(/:id)) route": function(path, params){
 
-        $('#content').html(this.view('tree'));
+        if (params.type == "tree") {
 
-        $('#subjects').inui_nested_set({
-            model: Intrepica.Models.Subject,
-            id: params.id
-        });
+            $('#content').html(this.view('nested_set'));
 
+            $('#subjects').inui_nested_set({
+                model: Intrepica.Models.Subject,
+                id: params.id
+            });
 
-//        $('#content').html(this.view('column_navigation'));
-//
-//        $('#subjects').inui_column_navigation({
-//            model: Intrepica.Models.Subject,
-//            id: params.id
-//        });
+        }else{
 
+            $('#content').html(this.view('column_navigation'));
 
+            $('#columns').inui_column_navigation({
+                model: Intrepica.Models.Subject,
+                id: params.id
+            });
+
+        }
      }
+
+
     });
 });

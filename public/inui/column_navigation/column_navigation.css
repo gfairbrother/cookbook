@@ -1,24 +1,42 @@
-.tabarea {
-border: solid 1px;
+.inui_column_navigation .container {
+    border: solid 1px;
+    height: 400px;
+    width:960px;
+    margin: 0px;
+    padding:0px;
 }
-.tabarea li{
-float: left;
-padding: 10px;
-list-style: none;
-border: solid 1px green;
-background-color: black;
-color: white;
+
+.inui_column_navigation .panel {
+    float:left;
+    width:239px;
+    height:400px;
+    margin: 0px;
+    padding:0px;
+    border-right:1px solid black;
+    overflow:auto;
 }
-.tabarea ul {
-height: 40px;
-border-bottom: solid 1px gray;
-padding: 0px;
-margin: 0px;
+
+.inui_column_navigation .panel ul {
+    padding:0px;
+    margin:0px;
 }
-.tabarea .active {
-background-color: white;
-color: black;
+.inui_column_navigation .panel li {
+    list-style:none;
 }
-.tabarea li.selected {
-color: red;
+.inui_column_navigation .panel li a {
+    display:block;
+    padding:15px;
+    border-width:0px 0px 1px 0px;
+    border-style:solid;
+    border-color:black;
+}
+
+.inui_column_navigation .panel li a:hover {
+    cursor: pointer;
+    background:#A6D7FC;
+}
+
+li.selected {
+    color:red;
+    background:#A6D7FC;
 }

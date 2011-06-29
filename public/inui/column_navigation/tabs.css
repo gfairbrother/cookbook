@@ -1,0 +1,29 @@
+.tabarea {
+    width:960px;
+    margin-bottom:2px;
+}
+.tabarea li{
+    float: left;
+    padding: 0px;
+    margin-right:5px;
+    list-style: none;
+
+}
+.tabarea a {
+    display:block;
+    padding: 10px;
+    margin:0px;
+    border-width:1px 1px 0px 1px;
+    border-style:solid;
+    border-color:black;
+}
+.tabarea ul {
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.tabarea li a:hover {
+    cursor: pointer;
+    background:#A6D7FC;
+}

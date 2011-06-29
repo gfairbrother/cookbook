@@ -22,8 +22,8 @@ steal.plugins(
 	//'jquery/dom/fixture',			// simulated Ajax requests
     'inui/nested_set', 'inui/column_navigation',
     'ss/router/controller',         //http://secondstory.github.com/secondstoryjs-router/
-	'jquery/dom/form_params',       // form data helper
-    '/mxui/layout/split'
+	'jquery/dom/form_params'       // form data helper
+
         )
 
 	.css('intrepica')	// loads styles
@@ -38,9 +38,10 @@ steal.plugins(
 
     .then(function($){
 
-        Router.add("/subjects(/:id)").to("subjects").name('subjects');
+    // to compile
+    // ./js steal/buildjs intrepica/index.html
 
-
+        Router.add("/subjects(/:type(/:id))").to("subjects").name('subjects');
 
 
 

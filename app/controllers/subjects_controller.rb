@@ -13,12 +13,18 @@ class SubjectsController < ApplicationController
   def index
 
     if params[:id] and !params[:id].empty?
+#      @subjects = []
+#      subject = Subject.find(params[:id])
+#      @subjects << subject
+#      @subjects << .children
+
       @subjects = Subject.find(params[:id]).children
+
     else
-      @subjects = Subject.where(:parent_id => nil).first.children
+      @subjects = Subject.root.children
     end
 
-    render :json => @subjects.to_json(:only => [:id, :name, :parent_id])
+    render :json => @subjects.to_json(:only => [:id, :name, :parent_id, :level])
   end
 
 #  def show
